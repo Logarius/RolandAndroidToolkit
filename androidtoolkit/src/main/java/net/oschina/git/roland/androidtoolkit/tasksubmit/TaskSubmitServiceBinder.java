@@ -16,4 +16,8 @@ public class TaskSubmitServiceBinder extends Binder {
     public TaskSubmitServiceBinder(TaskSubmitService service) {
         this.service = service;
     }
+
+    public TaskSubmitService getService() {
+        return service;
+    }
 }

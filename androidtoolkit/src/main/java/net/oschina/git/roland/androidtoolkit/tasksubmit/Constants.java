@@ -11,7 +11,6 @@ public class Constants {
      * 任务状
      */
     public enum TaskState {
-        CREATED, // 新建
         UPLOADING, // 上传
         PAUSED, // 暂停
         WAITING, // 等待
