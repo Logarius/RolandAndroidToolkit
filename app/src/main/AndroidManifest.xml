@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".submittask.SubmitTaskActivity"></activity>
+
+        <service android:name="net.oschina.git.roland.androidtoolkit.tasksubmit.TaskSubmitService" />
     </application>
 
 </manifest>

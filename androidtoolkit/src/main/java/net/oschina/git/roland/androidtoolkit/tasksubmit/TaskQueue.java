@@ -25,8 +25,10 @@ public class TaskQueue {
      * @param task 任务
      */
     public void addTask(BaseSubmitTask task) {
-        synchronized (LOCK_TASKLIST) {
-            taskList.add(task);
+        if (task != null) {
+            synchronized (LOCK_TASKLIST) {
+                taskList.add(task);
+            }
         }
     }
 
@@ -37,14 +39,16 @@ public class TaskQueue {
      * @return 任务
      */
     public BaseSubmitTask getTask(TaskState state) {
-        synchronized (LOCK_TASKLIST) {
-            for (BaseSubmitTask task : taskList) {
-                if (task.getTaskState() == state) {
-                    return task;
+        if (state != null) {
+            synchronized (LOCK_TASKLIST) {
+                for (BaseSubmitTask task : taskList) {
+                    if (task.getTaskState() == state) {
+                        return task;
+                    }
                 }
             }
-            return null;
         }
+        return null;
     }
 
     /**
@@ -53,8 +57,10 @@ public class TaskQueue {
      * @param task 任务
      */
     public void removeTask(BaseSubmitTask task) {
-        synchronized (LOCK_TASKLIST) {
-            taskList.remove(task);
+        if (task != null) {
+            synchronized (LOCK_TASKLIST) {
+                taskList.remove(task);
+            }
         }
     }
 
@@ -64,11 +70,13 @@ public class TaskQueue {
      * @param id 任务ID
      */
     public void removeTask(UUID id) {
-        synchronized (LOCK_TASKLIST) {
-            for (BaseSubmitTask task : taskList) {
-                if (task.getId() == id) {
-                    taskList.remove(task);
-                    return;
+        if (id != null) {
+            synchronized (LOCK_TASKLIST) {
+                for (BaseSubmitTask task : taskList) {
+                    if (task.getId() == id) {
+                        taskList.remove(task);
+                        return;
+                    }
                 }
             }
         }
@@ -76,7 +84,7 @@ public class TaskQueue {
 
     /**
      * 获取任务队列的一个副本
-     * <p>
+     *
      * 该返回的副本应只用于获取任务队列内容，对副本的操作不会影响队列的运作。
      *
      * @return 任务队列副本

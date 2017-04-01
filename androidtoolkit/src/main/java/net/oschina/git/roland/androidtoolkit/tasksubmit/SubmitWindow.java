@@ -1,6 +1,7 @@
 package net.oschina.git.roland.androidtoolkit.tasksubmit;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,6 +47,8 @@ public class SubmitWindow implements SubmitTaskProgressListener {
             this.windowSize = windowSize;
         }
         this.window = new BaseSubmitTask[this.windowSize];
+
+        Log.d(TAG, "Submit Window of size " + windowSize + " created.");
     }
 
     /**
@@ -65,7 +68,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
      * 查找下一个可用的窗口位置索引
      */
     private void findNextIndex() {
-        if (nextIndex < 0) {
+        if (nextIndex < 0 || window[nextIndex] != null) {
             for (int i = 0; i < windowSize; i++) {
                 if (window[i] == null) {
                     nextIndex = i;
@@ -86,6 +89,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
             executor.execute(task);
         } else {
             synchronized (LOCK_WINDOW) {
+                Log.d(TAG, "Remove task id " + task.getId());
                 window[task.getWindowIndex()] = null;
                 findNextIndex();
                 fetchAndStart();
@@ -104,9 +108,11 @@ public class SubmitWindow implements SubmitTaskProgressListener {
         if (nextIndex >= 0) {
             BaseSubmitTask task = taskQueue.getTask(TaskState.WAITING);
             if (task != null) {
+                Log.d(TAG, "put task id " + task.getId() + "to window " + nextIndex);
                 window[nextIndex] = task;
                 task.setTaskState(TaskState.UPLOADING);
                 task.setWindowIndex(nextIndex);
+                task.setProgressListener(this);
                 findNextIndex();
                 executor.execute(task);
             }

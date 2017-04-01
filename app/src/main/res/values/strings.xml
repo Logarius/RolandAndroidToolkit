@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RolandAndroidToolkit</string>
+    <string name="str_start">Start</string>
+    <string name="str_submit_task">Submit Task</string>
 </resources>

@@ -13,13 +13,19 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
 
     private static final String TAG = BaseSubmitTask.class.getSimpleName();
 
-    private TaskState taskState = TaskState.WAITING;
+    protected TaskState taskState = TaskState.WAITING;
 
-    private UUID id = UUID.randomUUID();
+    protected UUID id = UUID.randomUUID();
 
-    private SubmitTaskProgressListener progressListener;
+    protected SubmitTaskProgressListener progressListener;
 
-    private int windowIndex = -1;
+    protected int windowIndex = -1;
+
+    protected int maxProgress = 0;
+
+    protected int step = 0;
+
+    protected boolean result = false;
 
     public TaskState getTaskState() {
         return taskState;
@@ -42,11 +48,42 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
         this.progressListener = progressListener;
     }
 
+    public SubmitTaskProgressListener getProgressListener() {
+        return progressListener;
+    }
+
     public int getWindowIndex() {
         return windowIndex;
     }
 
     public void setWindowIndex(int windowIndex) {
         this.windowIndex = windowIndex;
+    }
+
+    public int getMaxProgress() {
+        return maxProgress;
+    }
+
+    public void setMaxProgress(int maxProgress) {
+        this.maxProgress = maxProgress;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public void finish() {
+
+        if (step == maxProgress) {
+            taskState = TaskState.FINISH;
+        }
+
+        if (progressListener != null) {
+            progressListener.onProgress(this);
+        }
     }
 }
