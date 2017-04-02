@@ -8,7 +8,7 @@ package net.oschina.git.roland.androidtoolkit.tasksubmit;
 public class Constants {
 
     /**
-     * 任务状
+     * 任务状态
      */
     public enum TaskState {
         UPLOADING, // 上传
@@ -17,4 +17,9 @@ public class Constants {
         ERROR, // 错误
         FINISH // 完成
     }
+
+    /**
+     * TaskSubmitService Intent传参Key值
+     */
+    public static final String INTENT_KEY_WINDOW_SIZE = "INTENT_KEY_WINDOW_SIZE";
 }
