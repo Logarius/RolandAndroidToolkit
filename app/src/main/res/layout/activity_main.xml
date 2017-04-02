@@ -13,4 +13,10 @@
         android:layout_height="wrap_content"
         android:text="@string/str_submit_task"/>
 
+    <Button
+        android:id="@+id/btn_validation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_validation"/>
+
 </LinearLayout>

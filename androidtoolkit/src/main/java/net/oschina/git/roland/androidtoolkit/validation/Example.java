@@ -32,7 +32,7 @@ public class Example {
         }
     };
 
-    class MyValidationTask extends BaseValidationTask {
+    private static class MyValidationTask extends BaseValidationTask {
 
         private Object data;
 

@@ -39,6 +39,7 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
                 if (!isRunning) {
                     task.setOnValidationFinishListener(this);
                     taskList.add(task);
+                    Log.d(TAG, "Task " + task.getName() + " added.");
                 }
             }
         }
@@ -52,6 +53,7 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
         if (!isRunning) {
             synchronized (this) {
                 if (!isRunning) {
+                    Log.d(TAG, "Validation start");
                     isRunning = true;
                     handler.sendEmptyMessage(0);
                 }

@@ -26,7 +26,7 @@ public abstract class BaseValidationTask implements Runnable {
     }
 
     protected void finish(boolean valid) {
-        Log.d(TAG, "task " + name + "finish result = " + String.valueOf(valid));
+        Log.d(TAG, "task " + name + " finish result = " + String.valueOf(valid));
         result = valid;
         finished = true;
         isRunning = false;

@@ -15,9 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".submittask.SubmitTaskActivity"></activity>
+        <activity android:name=".submittask.SubmitTaskActivity" />
 
         <service android:name="net.oschina.git.roland.androidtoolkit.tasksubmit.TaskSubmitService" />
+
+        <activity android:name=".validation.ValidationActivity"></activity>
     </application>
 
 </manifest>
