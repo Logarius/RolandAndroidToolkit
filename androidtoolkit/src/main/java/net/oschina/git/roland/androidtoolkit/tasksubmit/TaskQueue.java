@@ -102,4 +102,22 @@ public class TaskQueue {
             return taskListClone;
         }
     }
+
+    /**
+     * 设定指定ID的任务为指定状态
+     * @param id 任务ID
+     * @param state 指定状态
+     */
+    public void changeTaskState(UUID id, TaskState state) {
+        if (id != null && state != null) {
+            synchronized (LOCK_TASKLIST) {
+                for (BaseSubmitTask task : taskList) {
+                    if (task.getId() == id) {
+                        task.setTaskState(state);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }

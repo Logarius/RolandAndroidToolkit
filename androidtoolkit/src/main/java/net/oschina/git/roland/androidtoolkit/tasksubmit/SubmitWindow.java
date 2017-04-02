@@ -89,7 +89,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
             executor.execute(task);
         } else {
             synchronized (LOCK_WINDOW) {
-                Log.d(TAG, "Remove task id " + task.getId());
+                Log.d(TAG, "Remove task id " + task.getId() + " from window.");
                 window[task.getWindowIndex()] = null;
                 findNextIndex();
                 fetchAndStart();

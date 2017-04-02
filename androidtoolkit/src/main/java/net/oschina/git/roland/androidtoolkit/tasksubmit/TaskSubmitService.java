@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 任务提交服务
@@ -35,7 +36,7 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        if (submitWindow != null) {
+        if (submitWindow == null) {
             int windowSize = intent.getIntExtra(Constants.INTENT_KEY_WINDOW_SIZE, 1);
             submitWindow = new SubmitWindow(this, windowSize, taskQueue);
             submitWindow.setProgressListener(this);
@@ -66,6 +67,13 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
             for (SubmitTaskProgressListener listener : progressListenerList) {
                 listener.onProgress(task);
             }
+        }
+    }
+
+    public void changeTaskState(UUID id, Constants.TaskState state) {
+        taskQueue.changeTaskState(id, state);
+        if (state == Constants.TaskState.WAITING) {
+            submitWindow.notifyNewTaskAvailable();
         }
     }
 }
