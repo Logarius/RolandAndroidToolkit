@@ -1,8 +1,7 @@
 package net.oschina.git.roland.androidtoolkit.tasksubmit;
 
+import net.oschina.git.roland.androidtoolkit.common.StringUtils;
 import net.oschina.git.roland.androidtoolkit.tasksubmit.Constants.TaskState;
-
-import java.util.UUID;
 
 /**
  * 基本的提交任务类
@@ -11,11 +10,11 @@ import java.util.UUID;
 
 public abstract class BaseSubmitTask implements Cloneable, Runnable {
 
-    private static final String TAG = BaseSubmitTask.class.getSimpleName();
+    protected String TAG = getClass().getSimpleName();
 
     protected TaskState taskState = TaskState.WAITING;
 
-    protected UUID id = UUID.randomUUID();
+    protected String name;
 
     protected SubmitTaskProgressListener progressListener;
 
@@ -27,57 +26,14 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
 
     protected boolean result = false;
 
-    public TaskState getTaskState() {
-        return taskState;
+    public BaseSubmitTask(String name) {
+        if (StringUtils.isEmpty(name)) {
+            name = TAG;
+        }
+        this.name = name;
     }
 
-    public void setTaskState(TaskState taskState) {
-        this.taskState = taskState;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    @Override
-    public BaseSubmitTask clone() throws CloneNotSupportedException {
-        return (BaseSubmitTask) super.clone();
-    }
-
-    public void setProgressListener(SubmitTaskProgressListener progressListener) {
-        this.progressListener = progressListener;
-    }
-
-    public SubmitTaskProgressListener getProgressListener() {
-        return progressListener;
-    }
-
-    public int getWindowIndex() {
-        return windowIndex;
-    }
-
-    public void setWindowIndex(int windowIndex) {
-        this.windowIndex = windowIndex;
-    }
-
-    public int getMaxProgress() {
-        return maxProgress;
-    }
-
-    public void setMaxProgress(int maxProgress) {
-        this.maxProgress = maxProgress;
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
-    }
-
-    public void finish() {
-
+    protected void finish() {
         if (step == maxProgress) {
             taskState = TaskState.FINISH;
         }
@@ -85,5 +41,50 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
         if (progressListener != null) {
             progressListener.onProgress(this);
         }
+    }
+
+    @Override
+    public BaseSubmitTask clone() throws CloneNotSupportedException {
+        return (BaseSubmitTask) super.clone();
+    }
+
+    void setProgressListener(SubmitTaskProgressListener progressListener) {
+        this.progressListener = progressListener;
+    }
+
+    int getWindowIndex() {
+        return windowIndex;
+    }
+
+    void setWindowIndex(int windowIndex) {
+        this.windowIndex = windowIndex;
+    }
+
+    public int getMaxProgress() {
+        return maxProgress;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public boolean isResult() {
+        return result;
+    }
+
+    TaskState getTaskState() {
+        return taskState;
+    }
+
+    void setTaskState(TaskState taskState) {
+        this.taskState = taskState;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

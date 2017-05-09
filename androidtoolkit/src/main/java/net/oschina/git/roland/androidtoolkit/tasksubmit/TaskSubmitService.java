@@ -70,8 +70,8 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
         }
     }
 
-    public void changeTaskState(UUID id, Constants.TaskState state) {
-        taskQueue.changeTaskState(id, state);
+    public void changeTaskState(String name, Constants.TaskState state) {
+        taskQueue.changeTaskState(name, state);
         if (state == Constants.TaskState.WAITING) {
             submitWindow.notifyNewTaskAvailable();
         }

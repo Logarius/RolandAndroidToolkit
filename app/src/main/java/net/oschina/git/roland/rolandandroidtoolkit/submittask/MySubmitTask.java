@@ -8,18 +8,17 @@ import net.oschina.git.roland.androidtoolkit.tasksubmit.BaseSubmitTask;
  * Created by eka on 2017/4/1.
  */
 
-public class MySubmitTask extends BaseSubmitTask {
+class MySubmitTask extends BaseSubmitTask {
 
-    private static final String TAG = MySubmitTask.class.getSimpleName();
-
-    public MySubmitTask() {
+    MySubmitTask() {
+        super(null);
         maxProgress = 2;
     }
 
     @Override
     public void run() {
         try {
-            Log.d(TAG, "Task id " + id + " run.");
+            Log.d(TAG, "Task name " + name + " run.");
             Thread.sleep(1000);
             step++;
             finish();

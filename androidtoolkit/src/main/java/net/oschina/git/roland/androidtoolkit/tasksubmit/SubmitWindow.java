@@ -89,9 +89,9 @@ public class SubmitWindow implements SubmitTaskProgressListener {
             executor.execute(task);
         } else {
             synchronized (LOCK_WINDOW) {
-                Log.d(TAG, "Remove task id " + task.getId() + " from window.");
+                Log.d(TAG, "Remove task name " + task.getName() + " from window.");
                 window[task.getWindowIndex()] = null;
-                findNextIndex();
+                nextIndex = task.getWindowIndex();
                 fetchAndStart();
             }
         }
@@ -108,7 +108,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
         if (nextIndex >= 0) {
             BaseSubmitTask task = taskQueue.getTask(TaskState.WAITING);
             if (task != null) {
-                Log.d(TAG, "put task id " + task.getId() + "to window " + nextIndex);
+                Log.d(TAG, "put task name " + task.getName() + "to window " + nextIndex);
                 window[nextIndex] = task;
                 task.setTaskState(TaskState.UPLOADING);
                 task.setWindowIndex(nextIndex);

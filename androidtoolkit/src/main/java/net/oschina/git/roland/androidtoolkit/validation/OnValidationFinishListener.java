@@ -8,7 +8,7 @@ package net.oschina.git.roland.androidtoolkit.validation;
 public interface OnValidationFinishListener {
 
     /**
-     * 校验完成时调
+     * 校验完成时调用
      *
      * @param valid 校验结果
      */

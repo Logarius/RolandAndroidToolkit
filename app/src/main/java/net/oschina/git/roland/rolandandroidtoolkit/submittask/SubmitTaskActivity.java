@@ -18,7 +18,6 @@ import net.oschina.git.roland.androidtoolkit.tasksubmit.TaskSubmitServiceBinder;
 import net.oschina.git.roland.rolandandroidtoolkit.R;
 
 import java.util.Locale;
-import java.util.UUID;
 
 public class SubmitTaskActivity extends AppCompatActivity {
 
@@ -28,7 +27,7 @@ public class SubmitTaskActivity extends AppCompatActivity {
 
     private TaskSubmitService service = null;
 
-    private UUID taskId = null;
+    private String taskName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +63,13 @@ public class SubmitTaskActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_start:
-                    Log.d(TAG, "start task id " + taskId);
-                    service.changeTaskState(taskId, Constants.TaskState.WAITING);
+                    Log.d(TAG, "start task name " + taskName);
+                    service.changeTaskState(taskName, Constants.TaskState.WAITING);
                     break;
 
                 case R.id.btn_pause:
-                    Log.d(TAG, "pause task id " + taskId);
-                    service.changeTaskState(taskId, Constants.TaskState.PAUSED);
+                    Log.d(TAG, "pause task name " + taskName);
+                    service.changeTaskState(taskName, Constants.TaskState.PAUSED);
                     break;
             }
         }
@@ -79,8 +78,8 @@ public class SubmitTaskActivity extends AppCompatActivity {
     private SubmitTaskProgressListener progressListener = new SubmitTaskProgressListener() {
         @Override
         public void onProgress(BaseSubmitTask task) {
-            String format = "Task id %s onProgress %d/%d";
-            Log.d(TAG, String.format(Locale.US, format, task.getId(), task.getStep(), task.getMaxProgress()));
+            String format = "Task name %s onProgress %d/%d";
+            Log.d(TAG, String.format(Locale.US, format, task.getName(), task.getStep(), task.getMaxProgress()));
         }
     };
 
@@ -101,7 +100,7 @@ public class SubmitTaskActivity extends AppCompatActivity {
     private void addTask() {
         if (service != null) {
             MySubmitTask task = new MySubmitTask();
-            taskId = task.getId();
+            taskName = task.getName();
             service.addTask(task);
         }
     }

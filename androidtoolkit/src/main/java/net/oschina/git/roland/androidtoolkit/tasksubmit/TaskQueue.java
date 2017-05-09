@@ -2,8 +2,8 @@ package net.oschina.git.roland.androidtoolkit.tasksubmit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+import net.oschina.git.roland.androidtoolkit.common.StringUtils;
 import net.oschina.git.roland.androidtoolkit.tasksubmit.Constants.TaskState;
 
 /**
@@ -67,13 +67,13 @@ public class TaskQueue {
     /**
      * 删除指定ID的任务
      *
-     * @param id 任务ID
+     * @param name 任务名
      */
-    public void removeTask(UUID id) {
-        if (id != null) {
+    public void removeTask(String name) {
+        if (!StringUtils.isEmpty(name)) {
             synchronized (LOCK_TASKLIST) {
                 for (BaseSubmitTask task : taskList) {
-                    if (task.getId() == id) {
+                    if (task.getName().equals(name)) {
                         taskList.remove(task);
                         return;
                     }
@@ -105,14 +105,14 @@ public class TaskQueue {
 
     /**
      * 设定指定ID的任务为指定状态
-     * @param id 任务ID
+     * @param name 任务名
      * @param state 指定状态
      */
-    public void changeTaskState(UUID id, TaskState state) {
-        if (id != null && state != null) {
+    public void changeTaskState(String name, TaskState state) {
+        if (!StringUtils.isEmpty(name) && state != null) {
             synchronized (LOCK_TASKLIST) {
                 for (BaseSubmitTask task : taskList) {
-                    if (task.getId() == id) {
+                    if (task.getName().equals(name)) {
                         task.setTaskState(state);
                         break;
                     }
