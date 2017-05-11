@@ -13,7 +13,7 @@ import net.oschina.git.roland.androidtoolkit.tasksubmit.Constants.TaskState;
  * Created by Roland on 2017/3/28.
  */
 
-public class SubmitWindow implements SubmitTaskProgressListener {
+class SubmitWindow implements SubmitTaskProgressListener {
 
     private static final String TAG = SubmitWindow.class.getSimpleName();
 
@@ -35,7 +35,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
 
     private SubmitTaskProgressListener progressListener;
 
-    public SubmitWindow(Context context, int windowSize, TaskQueue taskQueue) {
+    SubmitWindow(Context context, int windowSize, TaskQueue taskQueue) {
         this.mContext = context;
         this.taskQueue = taskQueue;
 
@@ -54,7 +54,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
     /**
      * 通知上传窗口有新的任务
      */
-    public void notifyNewTaskAvailable() {
+    void notifyNewTaskAvailable() {
         if (nextIndex >= 0) {
             synchronized (LOCK_WINDOW) {
                 if (nextIndex >= 0) {
@@ -79,7 +79,7 @@ public class SubmitWindow implements SubmitTaskProgressListener {
         }
     }
 
-    public void setProgressListener(SubmitTaskProgressListener progressListener) {
+    void setProgressListener(SubmitTaskProgressListener progressListener) {
         this.progressListener = progressListener;
     }
 

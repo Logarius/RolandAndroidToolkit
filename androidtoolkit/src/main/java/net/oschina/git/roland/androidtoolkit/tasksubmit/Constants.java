@@ -15,7 +15,8 @@ public class Constants {
         PAUSED, // 暂停
         WAITING, // 等待
         ERROR, // 错误
-        FINISH // 完成
+        FINISH, // 完成
+        STOP // 停止
     }
 
     /**

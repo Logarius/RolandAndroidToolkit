@@ -44,17 +44,34 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
         return binder;
     }
 
+    /**
+     * 新增任务
+     */
     public void addTask(BaseSubmitTask task) {
         taskQueue.addTask(task);
         submitWindow.notifyNewTaskAvailable();
     }
 
+    /**
+     * 移除任务
+     */
+    public void removeTask(String name) {
+        taskQueue.changeTaskState(name, Constants.TaskState.STOP);
+        taskQueue.removeTask(name);
+    }
+
+    /**
+     * 注册进度监听
+     */
     public void addProgressListener(SubmitTaskProgressListener listener) {
         synchronized (LOCK_LISTENER) {
             progressListenerList.add(listener);
         }
     }
 
+    /**
+     * 移除进度监听
+     */
     public void removeProgressListener(SubmitTaskProgressListener listener) {
         synchronized (LOCK_LISTENER) {
             progressListenerList.remove(listener);
@@ -70,6 +87,11 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
         }
     }
 
+    /**
+     * 改变任务状态
+     * @param name 任务名
+     * @param state 目标状态
+     */
     public void changeTaskState(String name, Constants.TaskState state) {
         taskQueue.changeTaskState(name, state);
         if (state == Constants.TaskState.WAITING) {

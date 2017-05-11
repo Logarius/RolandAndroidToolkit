@@ -46,7 +46,13 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
     }
 
     public void setOnValidationFinishListener(OnValidationFinishListener listener) {
-        onValidationFinishListener = listener;
+        if (!isRunning) {
+            synchronized (this) {
+                if (!isRunning) {
+                    onValidationFinishListener = listener;
+                }
+            }
+        }
     }
 
     public void start() {
@@ -76,20 +82,29 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
 
         if (task.getResult()) {
             handler.sendEmptyMessage(0);
-        } else if (onValidationFinishListener != null) {
-            onValidationFinishListener.onValidationFinish(false);
+        } else {
+            finishValidation(false);
         }
     }
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
-            if (pos < taskList.size()) {
+            if (0 <= pos && pos < taskList.size()) {
                 singleThreadExecutor.execute(taskList.get(pos++));
-            } else if (onValidationFinishListener != null) {
-                onValidationFinishListener.onValidationFinish(true);
+            } else {
+                finishValidation(true);
             }
             return false;
         }
     });
+
+    private void finishValidation(boolean result) {
+        isRunning = false;
+        taskList.clear();
+        pos = 0;
+        if (onValidationFinishListener != null) {
+            onValidationFinishListener.onValidationFinish(result);
+        }
+    }
 }
