@@ -36,6 +36,7 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
     protected void finish() {
         if (step == maxProgress) {
             taskState = TaskState.FINISH;
+            result = true;
         }
 
         if (progressListener != null) {
@@ -68,7 +69,7 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
         return step;
     }
 
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 

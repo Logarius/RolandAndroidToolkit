@@ -3,9 +3,6 @@ package net.oschina.git.roland.androidtoolkit.tasksubmit;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import net.oschina.git.roland.androidtoolkit.tasksubmit.Constants.TaskState;
 
 /**
@@ -24,8 +21,6 @@ class SubmitWindow implements SubmitTaskProgressListener {
     private Context mContext;
 
     private BaseSubmitTask[] window;
-
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private TaskQueue taskQueue;
 
@@ -86,7 +81,7 @@ class SubmitWindow implements SubmitTaskProgressListener {
     @Override
     public void onProgress(BaseSubmitTask task) {
         if (task.getTaskState() == TaskState.UPLOADING) {
-            executor.execute(task);
+            new Thread(task).run();
         } else {
             synchronized (LOCK_WINDOW) {
                 Log.d(TAG, "Remove task name " + task.getName() + " from window.");
@@ -114,7 +109,7 @@ class SubmitWindow implements SubmitTaskProgressListener {
                 task.setWindowIndex(nextIndex);
                 task.setProgressListener(this);
                 findNextIndex();
-                executor.execute(task);
+                new Thread(task).run();
             }
         }
     }
