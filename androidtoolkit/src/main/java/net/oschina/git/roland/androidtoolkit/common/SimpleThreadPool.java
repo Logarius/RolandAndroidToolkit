@@ -38,8 +38,8 @@ public class SimpleThreadPool {
         if (isDestroyed) {
             throw new RuntimeException("This SimpleThreadPool has been destroyed");
         } else {
-            pool[index % poolSize].post(runnable);
-            index++;
+            pool[index].post(runnable);
+            index = index+1 % poolSize;
         }
     }
 
@@ -63,7 +63,6 @@ public class SimpleThreadPool {
 
         @Override
         public void run() {
-            super.run();
             Looper.prepare();
             handler = new Handler();
             Looper.loop();
