@@ -39,9 +39,7 @@ abstract class BaseSubmitTask(var name: String) : Cloneable, Runnable {
             result = true
         }
 
-        if (progressListener != null) {
-            progressListener!!.onProgress(this)
-        }
+        progressListener?.onProgress(this)
     }
 
     @Throws(CloneNotSupportedException::class)

@@ -15,8 +15,6 @@ abstract class BaseTaskStep {
 
     protected fun finish(result: Boolean) {
         this.result = result
-        if (progressListener != null) {
-            progressListener!!.onStepFinish(this)
-        }
+        progressListener?.onStepFinish(this)
     }
 }
