@@ -35,7 +35,7 @@ public class SubmitTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_submit_task);
 
         Intent serviceIntent = new Intent(SubmitTaskActivity.this, TaskSubmitService.class);
-        serviceIntent.putExtra(Constants.INTENT_KEY_WINDOW_SIZE, 1);
+        serviceIntent.putExtra(Constants.INSTANCE.getINTENT_KEY_WINDOW_SIZE(), 1);
         bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE);
 
         initComp();

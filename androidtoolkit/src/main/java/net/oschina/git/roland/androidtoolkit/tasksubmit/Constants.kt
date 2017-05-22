@@ -1,16 +1,16 @@
-package net.oschina.git.roland.androidtoolkit.tasksubmit;
+package net.oschina.git.roland.androidtoolkit.tasksubmit
 
 /**
  * 常量
  * Created by Roland on 2017/3/28.
  */
 
-public class Constants {
+object Constants {
 
     /**
      * 任务状态
      */
-    public enum TaskState {
+    enum class TaskState {
         UPLOADING, // 上传
         PAUSED, // 暂停
         WAITING, // 等待
@@ -22,5 +22,5 @@ public class Constants {
     /**
      * TaskSubmitService Intent传参Key值
      */
-    public static final String INTENT_KEY_WINDOW_SIZE = "INTENT_KEY_WINDOW_SIZE";
+    val INTENT_KEY_WINDOW_SIZE = "INTENT_KEY_WINDOW_SIZE"
 }

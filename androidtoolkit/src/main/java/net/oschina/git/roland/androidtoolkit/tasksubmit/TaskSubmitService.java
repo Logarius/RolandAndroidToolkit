@@ -36,7 +36,7 @@ public class TaskSubmitService extends Service implements SubmitTaskProgressList
     @Override
     public IBinder onBind(Intent intent) {
         if (submitWindow == null) {
-            int windowSize = intent.getIntExtra(Constants.INTENT_KEY_WINDOW_SIZE, 1);
+            int windowSize = intent.getIntExtra(Constants.INSTANCE.getINTENT_KEY_WINDOW_SIZE(), 1);
             submitWindow = new SubmitWindow(this, windowSize, taskQueue);
             submitWindow.setProgressListener(this);
         }

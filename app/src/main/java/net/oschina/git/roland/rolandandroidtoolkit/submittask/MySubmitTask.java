@@ -12,15 +12,15 @@ class MySubmitTask extends BaseSubmitTask {
 
     MySubmitTask() {
         super(null);
-        maxProgress = 2;
+        setMaxProgress(2);
     }
 
     @Override
     public void run() {
         try {
-            Log.d(TAG, "Task name " + name + " run.");
+            Log.d(getTAG(), "Task name " + getName() + " run.");
             Thread.sleep(1000);
-            step++;
+            setStep(getStep() + 1);
             finish();
         } catch (InterruptedException e) {
             e.printStackTrace();
