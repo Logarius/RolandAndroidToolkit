@@ -19,7 +19,7 @@ public class MyValidationTask extends BaseValidationTask {
     @Override
     public void run() {
         try {
-            Log.d(TAG, "Task " + name + " run.");
+            Log.d(TAG, "Task " + getName() + " run.");
             Thread.sleep(2000);
             finish(true);
         } catch (InterruptedException e) {
