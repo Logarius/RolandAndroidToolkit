@@ -27,7 +27,7 @@ public abstract class BaseSubmitTask implements Cloneable, Runnable {
     protected boolean result = false;
 
     public BaseSubmitTask(String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.INSTANCE.isEmpty(name)) {
             name = TAG;
         }
         this.name = name;

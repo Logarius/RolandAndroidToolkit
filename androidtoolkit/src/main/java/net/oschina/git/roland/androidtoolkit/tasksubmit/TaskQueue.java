@@ -70,7 +70,7 @@ public class TaskQueue {
      * @param name 任务名
      */
     public void removeTask(String name) {
-        if (!StringUtils.isEmpty(name)) {
+        if (!StringUtils.INSTANCE.isEmpty(name)) {
             synchronized (LOCK_TASKLIST) {
                 for (BaseSubmitTask task : taskList) {
                     if (task.getName().equals(name)) {
@@ -109,7 +109,7 @@ public class TaskQueue {
      * @param state 指定状态
      */
     public void changeTaskState(String name, TaskState state) {
-        if (!StringUtils.isEmpty(name) && state != null) {
+        if (!StringUtils.INSTANCE.isEmpty(name) && state != null) {
             synchronized (LOCK_TASKLIST) {
                 for (BaseSubmitTask task : taskList) {
                     if (task.getName().equals(name)) {
