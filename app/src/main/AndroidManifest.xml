@@ -19,7 +19,8 @@
 
         <service android:name="net.oschina.git.roland.androidtoolkit.tasksubmit.TaskSubmitService" />
 
-        <activity android:name=".validation.ValidationActivity"></activity>
+        <activity android:name=".validation.ValidationActivity" />
+        <activity android:name=".common.SimpleThreadPoolActivity" />
     </application>
 
 </manifest>

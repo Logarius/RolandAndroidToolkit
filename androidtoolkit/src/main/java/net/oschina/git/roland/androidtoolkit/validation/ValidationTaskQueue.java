@@ -2,8 +2,6 @@ package net.oschina.git.roland.androidtoolkit.validation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import android.content.Context;
 import android.os.Handler;
@@ -24,8 +22,6 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
     private int pos = 0;
 
     private OnValidationFinishListener onValidationFinishListener;
-
-    private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
     private boolean isRunning = false;
 
@@ -91,7 +87,7 @@ public class ValidationTaskQueue implements OnValidationFinishListener {
         @Override
         public boolean handleMessage(Message message) {
             if (0 <= pos && pos < taskList.size()) {
-                singleThreadExecutor.execute(taskList.get(pos++));
+                new Thread(taskList.get(pos++)).start();
             } else {
                 finishValidation(true);
             }

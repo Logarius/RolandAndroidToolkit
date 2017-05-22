@@ -4,27 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.oschina.git.roland.rolandandroidtoolkit.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="net.oschina.git.roland.rolandandroidtoolkit.common.SimpleThreadPoolActivity">
 
     <include layout="@layout/header" />
 
     <Button
-        android:id="@+id/btn_submit_task"
+        android:id="@+id/btn_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/str_submit_task"/>
+        android:text="@string/str_add"/>
 
     <Button
-        android:id="@+id/btn_validation"
+        android:id="@+id/btn_quit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/str_validation"/>
-
-    <Button
-        android:id="@+id/btn_simple_thread_pool"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/str_simple_thread_pool"/>
+        android:text="@string/str_quit"/>
 
 </LinearLayout>

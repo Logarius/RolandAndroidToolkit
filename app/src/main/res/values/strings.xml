@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">RolandAndroidToolkit</string>
-    <string name="str_start">Start</string>
+
+    <string name="str_main">Main</string>
     <string name="str_submit_task">Submit Task</string>
     <string name="str_validation">Validation</string>
+    <string name="str_simple_thread_pool">SimpleThreadPool</string>
+
     <string name="str_add">Add</string>
+    <string name="str_start">Start</string>
     <string name="str_pause">Pause</string>
+    <string name="str_quit">Quit</string>
 </resources>
